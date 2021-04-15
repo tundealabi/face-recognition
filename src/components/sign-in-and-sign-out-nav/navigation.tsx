@@ -1,3 +1,4 @@
+import { resetFaceRecog } from "redux/face-recognition/faceRecogSlice";
 import { selectFormType } from "redux/form/formSlice";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { logUserOut } from "redux/user/userSlice";
@@ -10,7 +11,10 @@ const Navigation = () => {
     if(userState){
         return (
             <nav style={{display:'flex',justifyContent:'flex-end'}} >
-            <p  className="f3 link dim pa3 pointer underline black" onClick={() => dispatch(logUserOut())} >Sign Out</p>
+            <p  className="f3 link dim pa3 pointer underline black" onClick={() => {
+                dispatch(resetFaceRecog('idle'))
+                dispatch(logUserOut())
+            }} >Sign Out</p>
         </nav>
         )
     }else{
