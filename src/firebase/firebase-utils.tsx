@@ -16,15 +16,26 @@ firebase.initializeApp(firebaseConfig);
 
 const storageRef = firebase.storage().ref();
 
-export const uploadToFireStorage = async (imageFile: File) => {
+type UploadToFireStorageProps  = {
+    imageFile: File
+    userEmail: string | undefined
+}
+
+export const uploadToFireStorage = async ({imageFile, userEmail}:UploadToFireStorageProps) => {
     let isFileImage = imageFile.type.includes("image")
     if (isFileImage) {
         let metadata = {
             contentType: imageFile.type || 'images/jpeg'
         }
-    let uploadImage = await storageRef.child(`user-image/${imageFile.name}`).put(imageFile,metadata);
-    return await uploadImage.ref.getDownloadURL()
-    
+        try {
+            let uploadImage = await storageRef.child(`user-image/${imageFile.name}`).put(imageFile,metadata);
+            return {
+                imageUrl: await uploadImage.ref.getDownloadURL(),
+                email: userEmail
+            }
+        } catch (error) {
+            throw new Error ("Something went wrong")
+        }
 
     } else {
         throw new Error ("Invalid file type")

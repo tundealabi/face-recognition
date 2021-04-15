@@ -20,7 +20,6 @@ const SignIn = () => {
                     initialValues={initialValues}
                     onSubmit={(values,actions) => {
                         actions.setSubmitting(true);
-                        console.log({ values, actions });
                         dispatch(fetchUserOnLogin(values))
                             .then(unwrapResult)
                             .then(() => history.push("/"))

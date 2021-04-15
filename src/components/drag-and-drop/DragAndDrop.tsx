@@ -1,15 +1,16 @@
 import React from 'react';
 import { fetchImageRecogByUpload } from 'redux/face-recognition/faceRecogSlice';
-import { useAppDispatch } from 'redux/hooks';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import './drag-and-drop.scss';
 
 const DragAndDrop = () => {
+const user = useAppSelector(({ user: { userState } }) => userState );
 const dispatch = useAppDispatch();
 const handleDrop = (e:React.DragEvent) => {
     e.stopPropagation();
     e.preventDefault();
     try {
-        dispatch(fetchImageRecogByUpload(e.dataTransfer.files[0]))
+        dispatch(fetchImageRecogByUpload({imageFile:e.dataTransfer.files[0], userEmail: user?.email}))
     } catch (error) {
         console.log('Error from drag and drop file',error)
     }

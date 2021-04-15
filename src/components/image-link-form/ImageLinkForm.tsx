@@ -52,7 +52,7 @@ const ImageLinkForm = () => {
             <div className="center" >
                 <form className="form center shadow-5 br3 pa4" onSubmit={handleImageSubmit} >
                 <FormInput imageForm type="text" value={imageUrl} onChange={handleInputChange} faceRecogStatus={faceRecogStatus} />
-                <UploadBtn useUpload={useUpload} faceRecogStatus={faceRecogStatus}/>
+                <UploadBtn useUpload={useUpload} faceRecogStatus={faceRecogStatus} userEmail={user?.email}/>
                 </form>
             </div>
 

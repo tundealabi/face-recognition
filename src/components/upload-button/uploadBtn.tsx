@@ -5,9 +5,10 @@ import { useAppDispatch } from 'redux/hooks';
 type UploadBtnProps  = {
     useUpload: boolean,
     faceRecogStatus: string
+    userEmail: string | undefined
 }
 
-const UploadBtn = ( { useUpload, faceRecogStatus }:UploadBtnProps ) => {
+const UploadBtn = ( { useUpload, faceRecogStatus, userEmail }:UploadBtnProps ) => {
     const dispatch = useAppDispatch();
     const fileInputRef = useRef<HTMLInputElement>(null);
     const handleFileUpload = () => {
@@ -17,7 +18,7 @@ const UploadBtn = ( { useUpload, faceRecogStatus }:UploadBtnProps ) => {
         try {
             if(e.target.files?.length) {
                 try {
-                    dispatch(fetchImageRecogByUpload(e.target.files[0]));
+                    dispatch(fetchImageRecogByUpload({imageFile:e.target.files[0],userEmail}));
                 } catch (err) {
                     dispatch(resetFaceRecog("error"))
                 }

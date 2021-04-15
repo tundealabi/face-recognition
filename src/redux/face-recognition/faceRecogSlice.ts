@@ -11,8 +11,8 @@ export const fetchImageRecog = createAsyncThunk(
 )
 export const fetchImageRecogByUpload = createAsyncThunk(
     "faceRecogState/fetchImageRecogByUploadStatus",
-    async (imageFile:File) => {
-        const firebaseResponse = await uploadToFireStorage(imageFile);
+    async (data:{imageFile:File, userEmail: string | undefined}) => {
+        const firebaseResponse = await uploadToFireStorage(data);
         const response = await imageApi(firebaseResponse);
         return response;
     }
