@@ -1,0 +1,24 @@
+.error-container {
+    padding: 1rem .42rem;
+
+.image-container {
+    width: 50%;
+    margin: 1rem auto;
+
+    .error-image {
+        width: 100%;
+        height: auto;
+    }
+
+}
+
+.error-message {
+    color: coral;
+}
+
+.reload-btn {
+    padding: .67rem;
+    background: linear-gradient(to right, rgb(27, 183, 228), rgb(255, 0, 0));
+}
+
+}

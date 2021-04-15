@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Redirect, Route } from 'react-router-dom';
+import Navigation from 'components/sign-in-and-sign-out-nav/navigation';
+import './App.scss';
+import SigninAndSignupPage from 'pages/sign-in-and-sign-up/SigninAndSignup';
+import HomePage from 'pages/homepage/Homepage';
+import { useAppSelector } from 'redux/hooks';
 
-function App() {
+
+const App = () =>  {
+  const userStatus = useAppSelector(({ user: { userState } }) => userState );
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navigation />
+      <Route exact path='/'>
+        {
+          userStatus ? 
+            <HomePage />
+            :
+            <Redirect to='signin' />
+        }
+      </Route>
+      <Route path='/signin'>
+        <SigninAndSignupPage />
+      </Route>
+      
     </div>
-  );
-}
+  )
+};
 
 export default App;

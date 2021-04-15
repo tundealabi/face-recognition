@@ -1,13 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { BrowserRouter as Router } from 'react-router-dom';
+import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import 'tachyons';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 ReactDOM.render(
+  <Provider store={store}>
+  <Router>
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
+  </Router>
+  </Provider>,
   document.getElementById('root')
 );
 
